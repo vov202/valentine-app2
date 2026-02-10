@@ -1,0 +1,9 @@
+{
+  "short_name": "Для тебя 💝",
+  "name": "Подарок на 14 февраля",
+  "description": "Персональный подарок для самой лучшей",
+  "start_url": "https://vov202.github.io/valentine-app2/",
+  "display": "standalone",
+  "theme_color": "#ff4081",
+  "background_color": "#ffecf1"
+}
