@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Для тебя 💝</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #ffecf1, #fff9fb);
+            min-height: 100vh;
+            color: #333;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .container {
+            max-width: 100%;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.1);
+        }
+        .title {
+            color: #ff4081;
+            font-size: 24px;
+            margin: 0 0 10px 0;
+        }
+        .date {
+            color: #888;
+            font-size: 14px;
+        }
+        .buttons-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        @media (min-width: 500px) {
+            .buttons-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        .btn {
+            padding: 18px 16px;
+            border: none;
+            border-radius: 15px;
+            background: white;
+            color: #ff4081;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            text-align: left;
+            box-shadow: 0 4px 8px rgba(255, 105, 180, 0.1);
+            transition: all 0.3s;
+            border: 2px solid #ffb6c1;
+            touch-action: manipulation;
+        }
+        .btn:active {
+            transform: scale(0.98);
+            background: #fff5f7;
+        }
+        .content {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            margin-top: 20px;
+            border: 2px solid #ffb6c1;
+            display: none;
+            max-height: 60vh;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        .content.active {
+            display: block;
+            animation: fadeIn 0.3s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .back-btn {
+            background: #ff4081;
+            color: white;
+            border: none;
+            padding: 14px 25px;
+            border-radius: 10px;
+            margin-top: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+            touch-action: manipulation;
+            font-size: 16px;
+        }
+        .reason-item {
+            padding: 10px 0;
+            border-bottom: 1px dashed #ffb6c1;
+            line-height: 1.5;
+        }
+        .reason-number {
+            color: #ff4081;
+            font-weight: bold;
+            margin-right: 10px;
+            min-width: 30px;
+            display: inline-block;
+        }
+        .photo-container {
+            width: 100%;
+            border-radius: 15px;
+            overflow: hidden;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .photo-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+            max-width: 100%;
+        }
+        .photo-caption {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            margin-top: 10px;
+            font-style: italic;
+        }
+        .music-note {
+            font-size: 40px;
+            text-align: center;
+            margin: 15px 0;
+            color: #ff4081;
+        }
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #888;
+            font-size: 14px;
+            padding: 15px;
+        }
+        h2 {
+            color: #ff4081;
+            margin-top: 0;
+        }
+        h3 {
+            color: #ff6699;
+            margin: 20px 0 10px 0;
+        }
+        .main-question-btn {
+            background: linear-gradient(135deg, #ff4081, #ff6699);
+            color: white;
+            border: none;
+            padding: 25px 20px;
+            border-radius: 20px;
+            font-size: 22px;
+            font-weight: bold;
+            text-align: center;
+            margin: 30px 0 20px 0;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(255, 64, 129, 0.3);
+            width: 100%;
+            transition: all 0.3s;
+        }
+        .answer-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+        .yes-btn, .no-btn {
+            flex: 1;
+            padding: 18px;
+            border: none;
+            border-radius: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.5s;
+        }
+        .yes-btn {
+            background: #4CAF50;
+            color: white;
+        }
+        .no-btn {
+            background: #f44336;
+            color: white;
+        }
+        .play-btn {
+            background: linear-gradient(135deg, #1DB954, #1ED760);
+            color: white;
+            border: none;
+            padding: 18px 25px;
+            border-radius: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 20px 0;
+            width: 100%;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            box-shadow: 0 4px 15px rgba(29, 185, 84, 0.3);
+            transition: all 0.3s;
+        }
+        .play-btn:active {
+            transform: scale(0.98);
+        }
+        .celebration {
+            text-align: center;
+            padding: 30px;
+        }
+        .celebration h2 {
+            color: #4CAF50;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+        .audio-container {
+            margin: 25px 0;
+        }
+        .audio-player {
+            width: 100%;
+            margin-top: 15px;
+        }
+        .song-layout {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .dossier-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .dossier-item {
+            background: #f8f8f8;
+            border-radius: 10px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            min-height: 120px;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+        }
+        .dossier-icon {
+            font-size: 30px;
+            margin-bottom: 10px;
+            color: #ff4081;
+        }
+        .dossier-text {
+            font-size: 12px;
+            color: #666;
+        }
+        .congrats-photos {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .congrats-photos img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        @media (min-width: 600px) {
+            .song-layout {
+                flex-direction: row;
+                align-items: flex-start;
+            }
+            .song-layout .photo-container {
+                flex: 1;
+            }
+            .song-layout .audio-container {
+                flex: 1;
+            }
+            .dossier-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .congrats-photos {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .congrats-photos img {
+                height: 120px;
+            }
+        }
+        @media (min-width: 800px) {
+            .dossier-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .congrats-photos {
+                grid-template-columns: repeat(5, 1fr);
+            }
+            .congrats-photos img {
+                height: 100px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="title">💝 Для самой лучшей 💝</h1>
+            <p class="date">14 февраля 2026</p>
+        </div>
+        
+        <div class="buttons-grid">
+            <button class="btn" onclick="showContent('love')">💝 100 причин любви</button>
+            <button class="btn" onclick="showContent('song')">🎵 Твой трек</button>
+            <button class="btn" onclick="showContent('photo')">🖼️ С этого всё началось</button>
+            <button class="btn" onclick="showContent('meet')">🌌 Начало истории</button>
+            <button class="btn" onclick="showContent('dossier')">📂 Секретное досье</button>
+            <button class="btn" onclick="showContent('time')">⏳ Наше время</button>
+            <button class="btn" onclick="showContent('congrats')">🎉 Поздравлятор 3000</button>
+            <button class="btn" onclick="showContent('fact')">🔍 Интересный факт</button>
+            <button class="btn" onclick="showContent('mirror')">🔮 Зеркало</button>
+            <button class="btn" onclick="showContent('tired')">🛏️ Устал засыпать...</button>
+        </div>
+        
+        <!-- Кнопка главного вопроса -->
+        <button class="main-question-btn" onclick="showContent('valentine')">
+            ❓ ГЛАВНЫЙ ВОПРОС
+        </button>
+        
+        <div id="content" class="content"></div>
+        
+        <footer>
+            <p>Создано с любовью специально для тебя</p>
+        </footer>
+    </div>
+
+    <script>
+        // Твои 100 причин с нумерацией
+        const reasons = [
+            "За твою улыбку.",
+            "За твой искренний смех.",
+            "За твой умный взгляд.",
+            "За твою добрую душу.",
+            "За твою решительность.",
+            "За наше взаимопонимание.",
+            "За твою мечтательность.",
+            "За твой спокойный голос.",
+            "За твою нежную заботу.",
+            "За твоё упрямство.",
+            "За наши общие воспоминания.",
+            "За твою любознательность.",
+            "За твою честность.",
+            "За твой оптимизм.",
+            "За твою поддержку.",
+            "За твою щедрость.",
+            "За твою силу духа.",
+            "За наши тихие вечера.",
+            "За твою увлечённость.",
+            "За твоё чувство юмора.",
+            "За твою порядочность.",
+            "За твоё безграничное терпение.",
+            "За твою скромность.",
+            "За твою надёжность.",
+            "За твой вкус в музыке.",
+            "За твою храбрость.",
+            "За уют с тобой.",
+            "За твою искренность.",
+            "За наши глупости.",
+            "За твою мудрость.",
+            "За то, как ты заботишься о близких.",
+            "За твою непосредственность.",
+            "За то, что ты умеешь удивлять.",
+            "За твою грацию.",
+            "За наши планы.",
+            "За твою ранимость.",
+            "За то, что ты умеешь прощать.",
+            "За твою настойчивость.",
+            "За наши общие вкусы.",
+            "За твою лёгкость.",
+            "За твою преданность.",
+            "За твоё творчество.",
+            "За спокойствие рядом с тобой.",
+            "За твою энергичность.",
+            "За наше молчание.",
+            "За твою чуткость.",
+            "За твою веру в меня.",
+            "За твоё изящество.",
+            "За наш совместный рост.",
+            "За твою простоту.",
+            "За твоё надёжное плечо.",
+            "За твои амбиции.",
+            "За то, что ты вдохновляешь меня.",
+            "За твой стиль.",
+            "За наши общие принципы.",
+            "За твою снисходительность.",
+            "За твой уютный образ.",
+            "За твою страстность.",
+            "За наше чувство команды.",
+            "За твою грамотность.",
+            "За запах твоих волос.",
+            "За твоё великодушие.",
+            "За наши ритуалы.",
+            "За твою задумчивость.",
+            "За лёгкость общения с тобой.",
+            "За твою харизму.",
+            "За мир в душе рядом с тобой.",
+            "За твою практичность.",
+            "За твой светлый ум.",
+            "За твою уязвимость.",
+            "За твоё уважение ко мне.",
+            "За твоё трудолюбие.",
+            "За наши совместные мечты.",
+            "За твою тактичность.",
+            "За чувство дома с тобой.",
+            "За твою самоиронию.",
+            "За то, что ты — мой надёжный тыл.",
+            "За твою прозорливость.",
+            "За тепло твоих рук.",
+            "За твою воспитанность.",
+            "За чувство защищённости с тобой.",
+            "За твою любовь к жизни.",
+            "За то, что с тобой легко.",
+            "За твою стойкость.",
+            "За наши совместные цели.",
+            "За твоё милосердие.",
+            "За чувство полёта с тобой.",
+            "За твою пунктуальность.",
+            "За гордость, которую я испытываю за тебя.",
+            "За твоё жизнелюбие.",
+            "За нашу связь.",
+            "За твой тонкий вкус.",
+            "За то, что ты — моя родная.",
+            "За твою отзывчивость.",
+            "За то, что с тобой интересно.",
+            "За твой внутренний свет.",
+            "За то, что с тобой я чувствую себя нужным.",
+            "За твою уникальность.",
+            "За то, что ты мой самый близкий человек.",
+            "Просто за то, что ты есть."
+        ];
+
+        // Контент для каждой кнопки
+        const contents = {
+            love: `
+                <h2>💝 100 причин, почему я тебя люблю</h2>
+                <p style="color: #666; margin-bottom: 20px;">Каждая из этих причин — частичка моего сердца</p>
+                <div id="reasons-list">
+                    ${reasons.map((reason, index) => 
+                        `<div class="reason-item">
+                            <span class="reason-number">${index + 1}.</span>${reason}
+                         </div>`
+                    ).join('')}
+                </div>
+                <button class="back-btn" onclick="hideContent()">← Назад к кнопкам</button>
+            `,
+            
+            meet: `
+                <h2>🌌 Начало нашей истории</h2>
+                <p>Школа. Первый этаж. Никого нет.</p>
+                <p>Мямлим непонятно что.</p>
+                <p>Какой-то дебил фоткает нас</p>
+                <p style="margin-top: 20px; color: #ff4081; font-style: italic;">Милота...</p>
+                <button class="back-btn" onclick="hideContent()">← Назад</button>
+            `,
+            
+            fact: `
+                <h2>🔍 Интересный факт</h2>
+                
+                <!-- ТОЛЬКО ФОТО, БЕЗ ТЕКСТА -->
+                <div class="photo-container">
+                    <div style="background: #f8f8f8; padding: 80px 20px; text-align: center; color: #888; border-radius: 10px;">
+                        <div style="font-size: 50px; margin-bottom: 20px;">📸</div>
+                        <p>Здесь будет интересный факт в виде фото</p>
+                        <p><small>Добавлю позже</small></p>
+                    </div>
+                </div>
+                
+                <button class="back-btn" onclick="hideContent()">← Назад</button>
+            `,
+            
+            mirror: `
+                <h2>🔮 Зеркало</h2>
+                
+                <div class="photo-container">
+                    <div style="background: #f8f8f8; padding: 80px 20px; text-align: center; color: #888; border-radius: 10px;">
+                        <div style="font-size: 50px; margin-bottom: 20px;">😺</div>
+                        <p>Здесь будет милый котик</p>
+                        <p><small>Добавлю позже</small></p>
+                    </div>
+                </div>
+                
+                <p style="text-align: center; font-size: 18px; color: #ff4081; margin-top: 20px; font-weight: bold;">
+                Это ты 😇</p>
+                
+                <button class="back-btn" onclick="hideContent()">← Назад</button>
+            `,
+            
+            tired: `
+                <h2>🛏️ Устал засыпать...</h2>
+                <div class="music-note">💤</div>
+                <p style="font-size: 20px; text-align: center; padding: 10px; line-height: 1.6;">
+                Устал засыпать в обнимку с одеялом, вместо тебя...</p>
+                <button class="back-btn" onclick="hideContent()">← Назад</button>
+            `,
+            
+            time: `
+                <h2>⏳ Наше время</h2>
+                <div id="timer" style="font-size: 18px; text-align: center; padding: 20px;">
+                    Загрузка...
+                </div>
+                <button class="back-btn" onclick="hideContent()">← Назад</button>
+            `,
+            
+            song: `
+                <h2>🎵 Твой трек</h2>
+                <p style="margin-bottom: 15px;">Песня, которая напоминает тебя</p>
+                
+                <div class="song-layout">
+                    <!-- СКРИНШОТ ТРЕКА -->
+                    <div class="photo-container">
+                        <img src="song-screenshot.jpg" 
+                             alt="Скриншот трека"
+                             style="width: 100%; height: auto;">
+                    </div>
+                    
+                    <!-- КНОПКА И АУДИОПЛЕЕР -->
+                    <div class="audio-container">
+                        <!-- Кнопка для включения трека -->
+                        <button class="play-btn" onclick="playSong()">
+                            <span style="font-size: 24px;">▶️</span>
+                            Включить трек
+                        </button>
+                        
+                        <!-- Аудиоплеер (скрыт по умолчанию) -->
+                        <div id="audio-player" style="display: none;">
+                            <audio controls class="audio-player" id="song-audio">
+                                <source src="song-audio.mp3" type="audio/mpeg">
+                                Ваш браузер не поддерживает аудио
+                            </audio>
+                            <p style="text-align: center; color: #666; margin-top: 10px; font-size: 14px;">
+                            💕</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="back-btn" onclick="hideContent()">← Назад</button>
+            `,
+            
+            photo: `
+                <h2>🖼️ С этого всё началось</h2>
+                <p style="margin-bottom: 15px;">5 октября 2023</p>
+                
+                <div class="photo-container">
+                    <div style="background: #f8f8f8; padding: 80px 20px; text-align: center; color: #888; border-radius: 10px;">
+                        <div style="font-size: 50px; margin-bottom: 20px;">📸</div>
+                        <p>Тут могло быть наше первое фото...</p>
+                        <p><small>Но главное — оно осталось в наших сердцах 💖</small></p>
+                    </div>
+                </div>
+                <p class="photo-caption">Помнишь этот момент? 💫</p>
+                
+                <button class="back-btn" onclick="hideContent()">← Назад</button>
+            `,
+            
+            dossier: `
+                <h2>📂 Секретное досье</h2>
+                <p style="margin-bottom: 15px;">!!!шок контент!!!</p>
+                
+                <!-- СЕТКА ИЗ 6 СКРИНШОТОВ -->
+                <div class="dossier-grid">
+                    <!-- Скриншот 1 -->
+                    <div class="dossier-item">
+                        <div class="dossier-icon">📱</div>
+                        <div class="dossier-text">Скриншот 1</div>
+                    </div>
+                    
+                    <!-- Скриншот 2 -->
+                    <div class="dossier-item">
+                        <div class="dossier-icon">💬</div>
+                        <div class="dossier-text">Скриншот 2</div>
+                    </div>
+                    
+                    <!-- Скриншот 3 -->
+                    <div class="dossier-item">
+                        <div class="dossier-icon">📸</div>
+                        <div class="dossier-text">Скриншот 3</div>
+                    </div>
+                    
+                    <!-- Скриншот 4 -->
+                    <div class="dossier-item">
+                        <div class="dossier-icon">❤️</div>
+                        <div class="dossier-text">Скриншот 4</div>
+                    </div>
+                    
+                    <!-- Скриншот 5 -->
+                    <div class="dossier-item">
+                        <div class="dossier-icon">😊</div>
+                        <div class="dossier-text">Скриншот 5</div>
+                    </div>
+                    
+                    <!-- Скриншот 6 -->
+                    <div class="dossier-item">
+                        <div class="dossier-icon">🌟</div>
+                        <div class="dossier-text">Скриншот 6</div>
+                    </div>
+                </div>
+                
+                <p class="photo-caption">Роблокс удалила мне мама 📱</p>
+                
+                <p style="margin-top: 20px; text-align: center; color: #666;">
+                    Каждый скриншот — история, которая делает нас ближе 💕
+                </p>
+                
+                <button class="back-btn" onclick="hideContent()">← Назад</button>
+            `,
+            
+            congrats: `
+                <h2>🎉 Поздравлятор 3000</h2>
+                <div class="music-note">💘</div>
+                <p style="font-size: 22px; color: #ff4081; text-align: center; font-weight: bold; margin-bottom: 20px;">
+                С ДНЁМ ВЛЮБЛЁННЫХ!</p>
+                
+                <p style="text-align: center; margin: 15px 0; font-size: 16px; line-height: 1.6;">
+                Ты — самое лучшее, что со мной случилось 💖
+                </p>
+                
+                <!-- 5 ФОТО ДЛЯ ПОЗДРАВЛЯТОРА -->
+                <div class="congrats-photos">
+                    <!-- Фото 1 -->
+                    <div style="background: #f8f8f8; border-radius: 10px; display: flex; align-items: center; justify-content: center;">
+                        <div style="text-align: center; padding: 20px; color: #888;">
+                            <div style="font-size: 30px;">📸</div>
+                            <p style="font-size: 12px; margin-top: 5px;">Фото 1</p>
+                        </div>
+                    </div>
+                    <!-- Фото 2 -->
+                    <div style="background: #f8f8f8; border-radius: 10px; display: flex; align-items: center; justify-content: center;">
+                        <div style="text-align: center; padding: 20px; color: #888;">
+                            <div style="font-size: 30px;">📸</div>
+                            <p style="font-size: 12px; margin-top: 5px;">Фото 2</p>
+                        </div>
+                    </div>
+                    <!-- Фото 3 -->
+                    <div style="background: #f8f8f8; border-radius: 10px; display: flex; align-items: center; justify-content: center;">
+                        <div style="text-align: center; padding: 20px; color: #888;">
+                            <div style="font-size: 30px;">📸</div>
+                            <p style="font-size: 12px; margin-top: 5px;">Фото 3</p>
+                        </div>
+                    </div>
+                    <!-- Фото 4 -->
+                    <div style="background: #f8f8f8; border-radius: 10px; display: flex; align-items: center; justify-content: center;">
+                        <div style="text-align: center; padding: 20px; color: #888;">
+                            <div style="font-size: 30px;">📸</div>
+                            <p style="font-size: 12px; margin-top: 5px;">Фото 4</p>
+                        </div>
+                    </div>
+                    <!-- Фото 5 -->
+                    <div style="background: #f8f8f8; border-radius: 10px; display: flex; align-items: center; justify-content: center;">
+                        <div style="text-align: center; padding: 20px; color: #888;">
+                            <div style="font-size: 30px;">📸</div>
+                            <p style="font-size: 12px; margin-top: 5px;">Фото 5</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <p style="text-align: center; color: #666; font-size: 14px; margin-top: 15px;">
+                Добавлю праздничные фото позже 🎊
+                </p>
+                
+                <button class="back-btn" onclick="hideContent()">← Назад</button>
+            `,
+            
+            valentine: `
+                <h2>💌 Самый главный вопрос</h2>
+                <div class="music-note">💝</div>
+                <p style="font-size: 24px; text-align: center; color: #ff4081; font-weight: bold; margin: 20px 0;">
+                Будешь моей валентинкой?</p>
+                
+                <div class="answer-buttons">
+                    <button class="yes-btn" id="yesBtn" onclick="answerYes()">Да, конечно, с радостью!</button>
+                    <button class="no-btn" id="noBtn" onclick="answerNo()">Не</button>
+                </div>
+                
+                <div id="celebration" style="display: none;">
+                    <div class="celebration">
+                        <h2>🎉 УРААА! 🎉</h2>
+                        <p style="font-size: 20px; margin: 15px 0;">Так и знал, что согласишься! 💖</p>
+                        <div style="font-size: 50px; margin: 20px 0;">🥳🎊💕</div>
+                    </div>
+                </div>
+                
+                <button class="back-btn" onclick="hideContent()">← Назад</button>
+            `
+        };
+        
+        let noClickCount = 0;
+        let yesClickCount = 0;
+        
+        function showContent(type) {
+            const contentDiv = document.getElementById('content');
+            contentDiv.innerHTML = contents[type] || '<p>Контент скоро появится...</p>';
+            contentDiv.classList.add('active');
+            
+            // Если это таймер - обновляем время
+            if (type === 'time') {
+                updateTimer();
+            }
+            
+            // Если это трек - скрываем аудиоплеер
+            if (type === 'song') {
+                document.getElementById('audio-player').style.display = 'none';
+            }
+            
+            // Сбрасываем анимации кнопок для вопроса валентинки
+            if (type === 'valentine') {
+                noClickCount = 0;
+                yesClickCount = 0;
+                document.getElementById('celebration').style.display = 'none';
+                const yesBtn = document.getElementById('yesBtn');
+                const noBtn = document.getElementById('noBtn');
+                if (yesBtn && noBtn) {
+                    yesBtn.style.transform = 'scale(1)';
+                    yesBtn.style.fontSize = '18px';
+                    noBtn.style.transform = 'scale(1)';
+                    noBtn.style.fontSize = '18px';
+                    noBtn.textContent = 'Не';
+                    noBtn.style.cursor = 'pointer';
+                    noBtn.disabled = false;
+                }
+            }
+            
+            // Прокручиваем к началу контента
+            contentDiv.scrollTop = 0;
+        }
+        
+        function hideContent() {
+            document.getElementById('content').classList.remove('active');
+        }
+        
+        function playSong() {
+            const audioPlayer = document.getElementById('audio-player');
+            const songAudio = document.getElementById('song-audio');
+            
+            // Показываем аудиоплеер
+            audioPlayer.style.display = 'block';
+            
+            // Прокручиваем к плееру
+            audioPlayer.scrollIntoView({ behavior: 'smooth' });
+            
+            // Автоматически не включаем (пользователь сам нажмет play)
+            // songAudio.play(); // Раскомментируй, если хочешь автовоспроизведение
+        }
+        
+        function answerYes() {
+            const celebration = document.getElementById('celebration');
+            const yesBtn = document.getElementById('yesBtn');
+            
+            yesClickCount++;
+            
+            // Увеличиваем кнопку "Да"
+            yesBtn.style.transform = `scale(${1 + yesClickCount * 0.2})`;
+            yesBtn.style.fontSize = `${18 + yesClickCount * 2}px`;
+            
+            // Показываем праздничное сообщение
+            celebration.style.display = 'block';
+            
+            // Прокручиваем к празднованию
+            celebration.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function answerNo() {
+            const noBtn = document.getElementById('noBtn');
+            const yesBtn = document.getElementById('yesBtn');
+            
+            noClickCount++;
+            
+            // Уменьшаем кнопку "Нет"
+            const scale = Math.max(0.3, 1 - noClickCount * 0.2);
+            noBtn.style.transform = `scale(${scale})`;
+            noBtn.style.fontSize = `${Math.max(12, 18 - noClickCount * 2)}px`;
+            
+            // Увеличиваем кнопку "Да"
+            yesClickCount++;
+            yesBtn.style.transform = `scale(${1 + yesClickCount * 0.2})`;
+            yesBtn.style.fontSize = `${18 + yesClickCount * 2}px`;
+            
+            // Меняем текст кнопки "Нет" после нескольких нажатий
+            if (noClickCount === 1) {
+                noBtn.textContent = 'Точно не?';
+            } else if (noClickCount === 2) {
+                noBtn.textContent = 'Ну пожалуйста...';
+            } else if (noClickCount === 3) {
+                noBtn.textContent = 'Я буду грустить 😢';
+            } else if (noClickCount >= 4) {
+                noBtn.textContent = 'Ладно, нажми "Да" 😉';
+                noBtn.style.cursor = 'not-allowed';
+                noBtn.disabled = true;
+            }
+        }
+        
+        function updateTimer() {
+            const startDate = new Date('2023-10-05');
+            const now = new Date();
+            const diff = now - startDate;
+            
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const months = Math.floor(days / 30.44);
+            const years = Math.floor(days / 365);
+            
+            const remainingDays = days % 365;
+            const remainingMonths = Math.floor(remainingDays / 30.44);
+            const finalDays = Math.floor(remainingDays % 30.44);
+            
+            document.getElementById('timer').innerHTML = 
+                `<div style="font-size: 28px; color: #ff4081; margin-bottom: 15px;">
+                    💖 ${days} дней 💖
+                </div>
+                <div style="font-size: 17px; line-height: 1.8;">
+                    Это:<br>
+                    <strong>${years} год</strong><br>
+                    <strong>${remainingMonths} месяцев</strong><br>
+                    <strong>${finalDays} дней</strong><br><br>
+                    <div style="color: #ff6699; font-style: italic;">
+                    И каждый день — счастливый! ✨
+                    </div>
+                </div>`;
+        }
+        
+        // Для мобильных устройств
+        if ('ontouchstart' in window) {
+            document.querySelectorAll('.btn').forEach(btn => {
+                btn.style.cursor = 'pointer';
+            });
+        }
+        
+        // Показать приветствие при открытии (без лишнего текста)
+        setTimeout(() => {
+            document.getElementById('content').innerHTML = `
+                <div style="text-align: center; padding: 20px;">
+                    <div style="font-size: 50px; margin-bottom: 15px;">💝</div>
+                    <h2 style="color: #ff4081;">Привет, любовь моя!</h2>
+                    <p style="font-size: 16px; line-height: 1.6; margin-bottom: 25px;">
+                    Нажимай на кнопки выше и читай что там 💕</p>
+                    <button class="back-btn" onclick="hideContent()">Начать просмотр</button>
+                </div>
+            `;
+            document.getElementById('content').classList.add('active');
+        }, 800);
+        
+        // Закрытие контента при клике снаружи (для мобильных)
+        document.addEventListener('click', function(event) {
+            const content = document.getElementById('content');
+            const isClickInsideContent = content.contains(event.target);
+            const isClickOnButton = event.target.classList.contains('btn') || 
+                                    event.target.classList.contains('main-question-btn') ||
+                                    event.target.classList.contains('play-btn') ||
+                                    event.target.classList.contains('yes-btn') ||
+                                    event.target.classList.contains('no-btn');
+            
+            if (!isClickInsideContent && !isClickOnButton && content.classList.contains('active')) {
+                hideContent();
+            }
+        });
+    </script>
+</body>
+</html>
