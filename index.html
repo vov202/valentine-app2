@@ -239,23 +239,25 @@
         .dossier-item {
             background: #f8f8f8;
             border-radius: 10px;
-            padding: 20px;
+            padding: 10px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             text-align: center;
-            min-height: 120px;
+            min-height: 150px;
             box-shadow: 0 3px 8px rgba(0,0,0,0.1);
         }
-        .dossier-icon {
-            font-size: 30px;
-            margin-bottom: 10px;
-            color: #ff4081;
+        .dossier-item img {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 8px;
         }
         .dossier-text {
             font-size: 12px;
             color: #666;
+            margin-top: 5px;
         }
         .congrats-photos {
             display: grid;
@@ -468,8 +470,11 @@
             fact: `
                 <h2>🔍 Интересный факт</h2>
                 
+                <!-- ФОТО ФАКТА -->
                 <div class="photo-container">
-                    <img src="fact.jpg" alt="Интересный факт" style="width: 100%; height: auto;">
+                    <img src="https://github.com/vov202/valentine-app2/raw/main/fact.jpg" 
+                         alt="Интересный факт"
+                         style="width: 100%; height: auto;">
                 </div>
                 
                 <button class="back-btn" onclick="hideContent()">← Назад</button>
@@ -478,8 +483,11 @@
             mirror: `
                 <h2>🔮 Зеркало</h2>
                 
+                <!-- ФОТО КОТИКА -->
                 <div class="photo-container">
-                    <img src="cat.jpg" alt="Милый котик" style="width: 100%; height: auto;">
+                    <img src="https://github.com/vov202/valentine-app2/raw/main/cat.jpg" 
+                         alt="Котик"
+                         style="width: 100%; height: auto;">
                 </div>
                 
                 <p style="text-align: center; font-size: 18px; color: #ff4081; margin-top: 20px; font-weight: bold;">
@@ -543,12 +551,11 @@
                 <h2>🖼️ С этого всё началось</h2>
                 <p style="margin-bottom: 15px;">5 октября 2023</p>
                 
+                <!-- ПЕРВОЕ ФОТО -->
                 <div class="photo-container">
-                    <div style="background: #f8f8f8; padding: 80px 20px; text-align: center; color: #888; border-radius: 10px;">
-                        <div style="font-size: 50px; margin-bottom: 20px;">📸</div>
-                        <p>Тут могло быть наше первое фото...</p>
-                        <p><small>Но главное — оно осталось в наших сердцах 💖</small></p>
-                    </div>
+                    <img src="https://github.com/vov202/valentine-app2/raw/main/first_photo.jpg" 
+                         alt="Наше первое фото"
+                         style="width: 100%; height: auto;">
                 </div>
                 <p class="photo-caption">Помнишь этот момент? 💫</p>
                 
@@ -563,44 +570,44 @@
                 <div class="dossier-grid">
                     <!-- Скриншот 1 -->
                     <div class="dossier-item">
-                        <div class="photo-container" style="margin: 0; box-shadow: none; border-radius: 5px;">
-                            <img src="dossier-1.jpg" alt="Скрин 1" style="max-height: 150px; object-fit: contain;">
-                        </div>
+                        <img src="https://github.com/vov202/valentine-app2/raw/main/dossier-1.jpg" 
+                             alt="Скриншот 1">
+                        <div class="dossier-text">Скриншот 1</div>
                     </div>
                     
                     <!-- Скриншот 2 -->
                     <div class="dossier-item">
-                        <div class="photo-container" style="margin: 0; box-shadow: none; border-radius: 5px;">
-                            <img src="dossier-2.jpg" alt="Скрин 2" style="max-height: 150px; object-fit: contain;">
-                        </div>
+                        <img src="https://github.com/vov202/valentine-app2/raw/main/dossier-2.jpg" 
+                             alt="Скриншот 2">
+                        <div class="dossier-text">Скриншот 2</div>
                     </div>
                     
                     <!-- Скриншот 3 -->
                     <div class="dossier-item">
-                        <div class="photo-container" style="margin: 0; box-shadow: none; border-radius: 5px;">
-                            <img src="dossier-3.jpg" alt="Скрин 3" style="max-height: 150px; object-fit: contain;">
-                        </div>
+                        <img src="https://github.com/vov202/valentine-app2/raw/main/dossier-3.jpg" 
+                             alt="Скриншот 3">
+                        <div class="dossier-text">Скриншот 3</div>
                     </div>
                     
                     <!-- Скриншот 4 -->
                     <div class="dossier-item">
-                        <div class="photo-container" style="margin: 0; box-shadow: none; border-radius: 5px;">
-                            <img src="dossier-4.jpg" alt="Скрин 4" style="max-height: 150px; object-fit: contain;">
-                        </div>
+                        <img src="https://github.com/vov202/valentine-app2/raw/main/dossier-4.jpg" 
+                             alt="Скриншот 4">
+                        <div class="dossier-text">Скриншот 4</div>
                     </div>
                     
                     <!-- Скриншот 5 -->
                     <div class="dossier-item">
-                        <div class="photo-container" style="margin: 0; box-shadow: none; border-radius: 5px;">
-                            <img src="dossier-5.jpg" alt="Скрин 5" style="max-height: 150px; object-fit: contain;">
-                        </div>
+                        <img src="https://github.com/vov202/valentine-app2/raw/main/dossier-5.jpg" 
+                             alt="Скриншот 5">
+                        <div class="dossier-text">Скриншот 5</div>
                     </div>
                     
                     <!-- Скриншот 6 -->
                     <div class="dossier-item">
-                        <div class="photo-container" style="margin: 0; box-shadow: none; border-radius: 5px;">
-                            <img src="dossier-6.jpg" alt="Скрин 6" style="max-height: 150px; object-fit: contain;">
-                        </div>
+                        <img src="https://github.com/vov202/valentine-app2/raw/main/dossier-6.jpg" 
+                             alt="Скриншот 6">
+                        <div class="dossier-text">Скриншот 6</div>
                     </div>
                 </div>
                 
@@ -626,29 +633,28 @@
                 <!-- 5 ФОТО ДЛЯ ПОЗДРАВЛЯТОРА -->
                 <div class="congrats-photos">
                     <!-- Фото 1 -->
-                    <div class="photo-container" style="margin: 0; height: 150px;">
-                        <img src="congrats-1.jpg" alt="Поздравление 1" style="height: 100%; object-fit: cover;">
-                    </div>
+                    <img src="https://github.com/vov202/valentine-app2/raw/main/congrats-1.jpg" 
+                         alt="Поздравление 1">
+                    
                     <!-- Фото 2 -->
-                    <div class="photo-container" style="margin: 0; height: 150px;">
-                        <img src="congrats-2.jpg" alt="Поздравление 2" style="height: 100%; object-fit: cover;">
-                    </div>
+                    <img src="https://github.com/vov202/valentine-app2/raw/main/congrats-2.jpg" 
+                         alt="Поздравление 2">
+                    
                     <!-- Фото 3 -->
-                    <div class="photo-container" style="margin: 0; height: 150px;">
-                        <img src="congrats-3.jpg" alt="Поздравление 3" style="height: 100%; object-fit: cover;">
-                    </div>
+                    <img src="https://github.com/vov202/valentine-app2/raw/main/congrats-3.jpg" 
+                         alt="Поздравление 3">
+                    
                     <!-- Фото 4 -->
-                    <div class="photo-container" style="margin: 0; height: 150px;">
-                        <img src="congrats-4.jpg" alt="Поздравление 4" style="height: 100%; object-fit: cover;">
-                    </div>
+                    <img src="https://github.com/vov202/valentine-app2/raw/main/congrats-4.jpg" 
+                         alt="Поздравление 4">
+                    
                     <!-- Фото 5 -->
-                    <div class="photo-container" style="margin: 0; height: 150px;">
-                        <img src="congrats-5.jpg" alt="Поздравление 5" style="height: 100%; object-fit: cover;">
-                    </div>
+                    <img src="https://github.com/vov202/valentine-app2/raw/main/congrats-5.jpg" 
+                         alt="Поздравление 5">
                 </div>
                 
                 <p style="text-align: center; color: #666; font-size: 14px; margin-top: 15px;">
-                Наши счастливые моменты 🎊
+                С любовью и теплом в сердце ❤️
                 </p>
                 
                 <button class="back-btn" onclick="hideContent()">← Назад</button>
@@ -730,6 +736,9 @@
             
             // Прокручиваем к плееру
             audioPlayer.scrollIntoView({ behavior: 'smooth' });
+            
+            // Автоматически не включаем (пользователь сам нажмет play)
+            // songAudio.play(); // Раскомментируй, если хочешь автовоспроизведение
         }
         
         function answerYes() {
@@ -814,7 +823,7 @@
             });
         }
         
-        // Показать приветствие при открытии
+        // Показать приветствие при открытии (без лишнего текста)
         setTimeout(() => {
             document.getElementById('content').innerHTML = `
                 <div style="text-align: center; padding: 20px;">
@@ -828,7 +837,7 @@
             document.getElementById('content').classList.add('active');
         }, 800);
         
-        // Закрытие контента при клике снаружи
+        // Закрытие контента при клике снаружи (для мобильных)
         document.addEventListener('click', function(event) {
             const content = document.getElementById('content');
             const isClickInsideContent = content.contains(event.target);
