@@ -2,7 +2,18 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- Обязательные мета-теги для Telegram Web App -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    
+    <!-- Telegram Web App Meta Tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#ff4081">
+    
+    <!-- Manifest для PWA -->
+    <link rel="manifest" href="manifest.json">
+    
     <title>Для тебя 💝</title>
     <style>
         body {
@@ -94,7 +105,7 @@
         .title {
             color: #ff4081;
             font-size: 26px;
-            margin: 0 0 5px 0; /* Уменьшен отступ */
+            margin: 0 0 5px 0;
             position: relative;
             display: inline-block;
         }
@@ -120,9 +131,9 @@
             color: #888;
             font-size: 14px;
             position: relative;
-            display: block; /* Изменено на block */
-            margin-top: 5px; /* Добавлен отступ сверху */
-            padding: 3px 10px; /* Уменьшен padding */
+            display: block;
+            margin-top: 5px;
+            padding: 3px 10px;
             background: rgba(255, 182, 193, 0.1);
             border-radius: 15px;
             border: 1px dashed #ffb6c1;
