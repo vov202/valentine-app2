@@ -468,13 +468,8 @@
             fact: `
                 <h2>🔍 Интересный факт</h2>
                 
-                <!-- ТОЛЬКО ФОТО, БЕЗ ТЕКСТА -->
                 <div class="photo-container">
-                    <div style="background: #f8f8f8; padding: 80px 20px; text-align: center; color: #888; border-radius: 10px;">
-                        <div style="font-size: 50px; margin-bottom: 20px;">📸</div>
-                        <p>Здесь будет интересный факт в виде фото</p>
-                        <p><small>Добавлю позже</small></p>
-                    </div>
+                    <img src="fact.jpg" alt="Интересный факт" style="width: 100%; height: auto;">
                 </div>
                 
                 <button class="back-btn" onclick="hideContent()">← Назад</button>
@@ -484,11 +479,7 @@
                 <h2>🔮 Зеркало</h2>
                 
                 <div class="photo-container">
-                    <div style="background: #f8f8f8; padding: 80px 20px; text-align: center; color: #888; border-radius: 10px;">
-                        <div style="font-size: 50px; margin-bottom: 20px;">😺</div>
-                        <p>Здесь будет милый котик</p>
-                        <p><small>Добавлю позже</small></p>
-                    </div>
+                    <img src="cat.jpg" alt="Милый котик" style="width: 100%; height: auto;">
                 </div>
                 
                 <p style="text-align: center; font-size: 18px; color: #ff4081; margin-top: 20px; font-weight: bold;">
@@ -572,38 +563,44 @@
                 <div class="dossier-grid">
                     <!-- Скриншот 1 -->
                     <div class="dossier-item">
-                        <div class="dossier-icon">📱</div>
-                        <div class="dossier-text">Скриншот 1</div>
+                        <div class="photo-container" style="margin: 0; box-shadow: none; border-radius: 5px;">
+                            <img src="dossier-1.jpg" alt="Скрин 1" style="max-height: 150px; object-fit: contain;">
+                        </div>
                     </div>
                     
                     <!-- Скриншот 2 -->
                     <div class="dossier-item">
-                        <div class="dossier-icon">💬</div>
-                        <div class="dossier-text">Скриншот 2</div>
+                        <div class="photo-container" style="margin: 0; box-shadow: none; border-radius: 5px;">
+                            <img src="dossier-2.jpg" alt="Скрин 2" style="max-height: 150px; object-fit: contain;">
+                        </div>
                     </div>
                     
                     <!-- Скриншот 3 -->
                     <div class="dossier-item">
-                        <div class="dossier-icon">📸</div>
-                        <div class="dossier-text">Скриншот 3</div>
+                        <div class="photo-container" style="margin: 0; box-shadow: none; border-radius: 5px;">
+                            <img src="dossier-3.jpg" alt="Скрин 3" style="max-height: 150px; object-fit: contain;">
+                        </div>
                     </div>
                     
                     <!-- Скриншот 4 -->
                     <div class="dossier-item">
-                        <div class="dossier-icon">❤️</div>
-                        <div class="dossier-text">Скриншот 4</div>
+                        <div class="photo-container" style="margin: 0; box-shadow: none; border-radius: 5px;">
+                            <img src="dossier-4.jpg" alt="Скрин 4" style="max-height: 150px; object-fit: contain;">
+                        </div>
                     </div>
                     
                     <!-- Скриншот 5 -->
                     <div class="dossier-item">
-                        <div class="dossier-icon">😊</div>
-                        <div class="dossier-text">Скриншот 5</div>
+                        <div class="photo-container" style="margin: 0; box-shadow: none; border-radius: 5px;">
+                            <img src="dossier-5.jpg" alt="Скрин 5" style="max-height: 150px; object-fit: contain;">
+                        </div>
                     </div>
                     
                     <!-- Скриншот 6 -->
                     <div class="dossier-item">
-                        <div class="dossier-icon">🌟</div>
-                        <div class="dossier-text">Скриншот 6</div>
+                        <div class="photo-container" style="margin: 0; box-shadow: none; border-radius: 5px;">
+                            <img src="dossier-6.jpg" alt="Скрин 6" style="max-height: 150px; object-fit: contain;">
+                        </div>
                     </div>
                 </div>
                 
@@ -629,44 +626,29 @@
                 <!-- 5 ФОТО ДЛЯ ПОЗДРАВЛЯТОРА -->
                 <div class="congrats-photos">
                     <!-- Фото 1 -->
-                    <div style="background: #f8f8f8; border-radius: 10px; display: flex; align-items: center; justify-content: center;">
-                        <div style="text-align: center; padding: 20px; color: #888;">
-                            <div style="font-size: 30px;">📸</div>
-                            <p style="font-size: 12px; margin-top: 5px;">Фото 1</p>
-                        </div>
+                    <div class="photo-container" style="margin: 0; height: 150px;">
+                        <img src="congrats-1.jpg" alt="Поздравление 1" style="height: 100%; object-fit: cover;">
                     </div>
                     <!-- Фото 2 -->
-                    <div style="background: #f8f8f8; border-radius: 10px; display: flex; align-items: center; justify-content: center;">
-                        <div style="text-align: center; padding: 20px; color: #888;">
-                            <div style="font-size: 30px;">📸</div>
-                            <p style="font-size: 12px; margin-top: 5px;">Фото 2</p>
-                        </div>
+                    <div class="photo-container" style="margin: 0; height: 150px;">
+                        <img src="congrats-2.jpg" alt="Поздравление 2" style="height: 100%; object-fit: cover;">
                     </div>
                     <!-- Фото 3 -->
-                    <div style="background: #f8f8f8; border-radius: 10px; display: flex; align-items: center; justify-content: center;">
-                        <div style="text-align: center; padding: 20px; color: #888;">
-                            <div style="font-size: 30px;">📸</div>
-                            <p style="font-size: 12px; margin-top: 5px;">Фото 3</p>
-                        </div>
+                    <div class="photo-container" style="margin: 0; height: 150px;">
+                        <img src="congrats-3.jpg" alt="Поздравление 3" style="height: 100%; object-fit: cover;">
                     </div>
                     <!-- Фото 4 -->
-                    <div style="background: #f8f8f8; border-radius: 10px; display: flex; align-items: center; justify-content: center;">
-                        <div style="text-align: center; padding: 20px; color: #888;">
-                            <div style="font-size: 30px;">📸</div>
-                            <p style="font-size: 12px; margin-top: 5px;">Фото 4</p>
-                        </div>
+                    <div class="photo-container" style="margin: 0; height: 150px;">
+                        <img src="congrats-4.jpg" alt="Поздравление 4" style="height: 100%; object-fit: cover;">
                     </div>
                     <!-- Фото 5 -->
-                    <div style="background: #f8f8f8; border-radius: 10px; display: flex; align-items: center; justify-content: center;">
-                        <div style="text-align: center; padding: 20px; color: #888;">
-                            <div style="font-size: 30px;">📸</div>
-                            <p style="font-size: 12px; margin-top: 5px;">Фото 5</p>
-                        </div>
+                    <div class="photo-container" style="margin: 0; height: 150px;">
+                        <img src="congrats-5.jpg" alt="Поздравление 5" style="height: 100%; object-fit: cover;">
                     </div>
                 </div>
                 
                 <p style="text-align: center; color: #666; font-size: 14px; margin-top: 15px;">
-                Добавлю праздничные фото позже 🎊
+                Наши счастливые моменты 🎊
                 </p>
                 
                 <button class="back-btn" onclick="hideContent()">← Назад</button>
@@ -748,9 +730,6 @@
             
             // Прокручиваем к плееру
             audioPlayer.scrollIntoView({ behavior: 'smooth' });
-            
-            // Автоматически не включаем (пользователь сам нажмет play)
-            // songAudio.play(); // Раскомментируй, если хочешь автовоспроизведение
         }
         
         function answerYes() {
@@ -835,7 +814,7 @@
             });
         }
         
-        // Показать приветствие при открытии (без лишнего текста)
+        // Показать приветствие при открытии
         setTimeout(() => {
             document.getElementById('content').innerHTML = `
                 <div style="text-align: center; padding: 20px;">
@@ -849,7 +828,7 @@
             document.getElementById('content').classList.add('active');
         }, 800);
         
-        // Закрытие контента при клике снаружи (для мобильных)
+        // Закрытие контента при клике снаружи
         document.addEventListener('click', function(event) {
             const content = document.getElementById('content');
             const isClickInsideContent = content.contains(event.target);
