@@ -94,7 +94,7 @@
         .title {
             color: #ff4081;
             font-size: 26px;
-            margin: 0 0 10px 0;
+            margin: 0 0 5px 0; /* Уменьшен отступ */
             position: relative;
             display: inline-block;
         }
@@ -120,11 +120,15 @@
             color: #888;
             font-size: 14px;
             position: relative;
-            display: inline-block;
-            padding: 5px 15px;
+            display: block; /* Изменено на block */
+            margin-top: 5px; /* Добавлен отступ сверху */
+            padding: 3px 10px; /* Уменьшен padding */
             background: rgba(255, 182, 193, 0.1);
-            border-radius: 20px;
+            border-radius: 15px;
             border: 1px dashed #ffb6c1;
+            max-width: 150px;
+            margin-left: auto;
+            margin-right: auto;
         }
         
         .buttons-grid {
@@ -917,7 +921,7 @@
                                 Ваш браузер не поддерживает аудио
                             </audio>
                             <p style="text-align: center; color: #666; margin-top: 10px; font-size: 14px;">
-                            💕 Слушай с любовью</p>
+                            💕</p>
                         </div>
                     </div>
                 </div>
@@ -1005,8 +1009,7 @@
                 С ДНЁМ ВЛЮБЛЁННЫХ! 💝</p>
                 
                 <p style="text-align: center; margin: 15px 0; font-size: 18px; line-height: 1.6; padding: 15px; background: rgba(255, 182, 193, 0.1); border-radius: 15px;">
-                Ты — самое лучшее, что со мной случилось 💖<br>
-                Спасибо, что ты есть в моей жизни! ✨</p>
+                Ты — самое лучшее, что со мной случилось 💖</p>
                 
                 <!-- 5 ФОТО ДЛЯ ПОЗДРАВЛЯТОРА -->
                 <div class="congrats-photos">
@@ -1032,8 +1035,7 @@
                 </div>
                 
                 <p style="text-align: center; color: #666; font-size: 16px; margin-top: 20px; padding: 15px; border-top: 2px dashed #ffb6c1;">
-                С любовью и теплом в сердце ❤️<br>
-                <span style="font-size: 14px; opacity: 0.8;">💕🐱💋😻✨💝😘🌟</span></p>
+                💕🐱💋😻✨💝😘🌟</p>
                 
                 <button class="back-btn" onclick="hideContent()">Назад</button>
             `,
@@ -1234,8 +1236,7 @@
                     <div style="font-size: 60px; margin-bottom: 15px; animation: pulse 2s infinite;">💝</div>
                     <h2 style="color: #ff4081;">Привет, любовь моя! 💕</h2>
                     <p style="font-size: 18px; line-height: 1.6; margin-bottom: 25px; padding: 15px; background: rgba(255, 182, 193, 0.1); border-radius: 15px;">
-                    Нажимай на кнопки выше и читай что там 💖<br>
-                    Я приготовил для тебя сюрпризы! 🎁✨</p>
+                    Нажимай на кнопки выше и читай что там 💖</p>
                     <button class="back-btn" onclick="hideContent()">Начать просмотр 💕</button>
                 </div>
             `;
