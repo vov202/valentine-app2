@@ -304,6 +304,24 @@
                 height: 100px;
             }
         }
+        .timer-container {
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #fff5f7, white);
+            border-radius: 15px;
+            margin: 15px 0;
+            border: 2px solid #ffb6c1;
+        }
+        .timer-main {
+            font-size: 28px;
+            color: #ff4081;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        .timer-details {
+            font-size: 17px;
+            line-height: 1.8;
+        }
     </style>
 </head>
 <body>
@@ -685,15 +703,27 @@
         
         let noClickCount = 0;
         let yesClickCount = 0;
+        let timerInterval = null;
         
         function showContent(type) {
             const contentDiv = document.getElementById('content');
             contentDiv.innerHTML = contents[type] || '<p>Контент скоро появится...</p>';
             contentDiv.classList.add('active');
             
-            // Если это таймер - обновляем время
+            // Если это таймер - обновляем время и запускаем автообновление
             if (type === 'time') {
                 updateTimer();
+                // Останавливаем предыдущий интервал если был
+                if (timerInterval) {
+                    clearInterval(timerInterval);
+                }
+                timerInterval = setInterval(updateTimer, 30000); // Обновлять каждые 30 секунд
+            } else {
+                // Останавливаем автообновление таймера при переходе в другой раздел
+                if (timerInterval) {
+                    clearInterval(timerInterval);
+                    timerInterval = null;
+                }
             }
             
             // Если это трек - скрываем аудиоплеер
@@ -725,6 +755,12 @@
         
         function hideContent() {
             document.getElementById('content').classList.remove('active');
+            
+            // Останавливаем таймер при закрытии контента
+            if (timerInterval) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+            }
         }
         
         function playSong() {
@@ -736,9 +772,6 @@
             
             // Прокручиваем к плееру
             audioPlayer.scrollIntoView({ behavior: 'smooth' });
-            
-            // Автоматически не включаем (пользователь сам нажмет play)
-            // songAudio.play(); // Раскомментируй, если хочешь автовоспроизведение
         }
         
         function answerYes() {
@@ -789,29 +822,40 @@
         }
         
         function updateTimer() {
-            const startDate = new Date('2023-10-05');
+            const startDate = new Date('2023-10-05T00:00:00'); // Начало отношений 5 октября 2023
             const now = new Date();
             const diff = now - startDate;
             
-            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-            const months = Math.floor(days / 30.44);
-            const years = Math.floor(days / 365);
+            // Расчет дней, часов, минут, секунд
+            const totalSeconds = Math.floor(diff / 1000);
+            const days = Math.floor(totalSeconds / (3600 * 24));
+            const hours = Math.floor((totalSeconds % (3600 * 24)) / 3600);
+            const minutes = Math.floor((totalSeconds % 3600) / 60);
+            const seconds = totalSeconds % 60;
             
+            // Расчет месяцев и лет (приблизительно)
+            const years = Math.floor(days / 365);
             const remainingDays = days % 365;
-            const remainingMonths = Math.floor(remainingDays / 30.44);
+            const months = Math.floor(remainingDays / 30.44);
             const finalDays = Math.floor(remainingDays % 30.44);
             
             document.getElementById('timer').innerHTML = 
-                `<div style="font-size: 28px; color: #ff4081; margin-bottom: 15px;">
-                    💖 ${days} дней 💖
-                </div>
-                <div style="font-size: 17px; line-height: 1.8;">
-                    Это:<br>
-                    <strong>${years} год</strong><br>
-                    <strong>${remainingMonths} месяцев</strong><br>
-                    <strong>${finalDays} дней</strong><br><br>
-                    <div style="color: #ff6699; font-style: italic;">
-                    И каждый день — счастливый! ✨
+                `<div class="timer-container">
+                    <div class="timer-main">
+                        💖 ${days} дней ${hours} часов ${minutes} минут 💖
+                    </div>
+                    <div class="timer-details">
+                        Это:<br>
+                        <strong>${years} год</strong><br>
+                        <strong>${months} месяцев</strong><br>
+                        <strong>${finalDays} дней</strong><br>
+                        <strong>${hours} часов</strong><br>
+                        <strong>${minutes} минут</strong><br>
+                        <strong>${seconds} секунд</strong><br><br>
+                        <div style="color: #ff6699; font-style: italic;">
+                        И каждая секунда с тобой — счастье! ✨<br>
+                        <small style="font-size: 14px;">(таймер обновляется каждые 30 секунд)</small>
+                        </div>
                     </div>
                 </div>`;
         }
