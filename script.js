@@ -450,9 +450,10 @@ function showContent(type) {
     contentDiv.innerHTML = contents[type] || '<p>Контент скоро появится... 💕</p>';
     contentDiv.classList.add('active');
     
+    // Плавно прокручиваем к контенту
     contentDiv.scrollIntoView({ 
         behavior: 'smooth',
-        block: 'nearest'
+        block: 'start'
     });
     
     if (type === 'time') {
@@ -500,7 +501,27 @@ function showContent(type) {
 }
 
 function hideContent() {
-    document.getElementById('content').classList.remove('active');
+    const contentDiv = document.getElementById('content');
+    
+    // Возвращаем приветственный экран
+    contentDiv.innerHTML = `
+        <div style="text-align: center; padding: 20px;">
+            <div style="font-size: 60px; margin-bottom: 15px; animation: pulse 2s infinite;">💝</div>
+            <h2 style="color: #ff4081;">Привет, любовь моя! 💕</h2>
+            <p style="font-size: 18px; line-height: 1.6; margin-bottom: 25px; padding: 15px; background: rgba(255, 182, 193, 0.1); border-radius: 15px;">
+            Нажимай на кнопки выше и читай что там 💖</p>
+            <button class="back-btn" onclick="hideContent()">Начать просмотр 💕</button>
+        </div>
+    `;
+    contentDiv.classList.add('active');
+    
+    // Прокручиваем к приветствию
+    contentDiv.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+    });
+    
+    // Останавливаем таймер
     if (timerInterval) {
         clearInterval(timerInterval);
         timerInterval = null;
@@ -611,7 +632,8 @@ if ('ontouchstart' in window) {
     });
 }
 
-// УДАЛЯЕМ setTimeout - приветствие уже есть в HTML!
+// При загрузке страницы приветствие уже есть в HTML
+// Ничего не делаем, оно уже отображается!
 
 document.addEventListener('click', function(event) {
     const content = document.getElementById('content');
