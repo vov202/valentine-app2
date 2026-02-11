@@ -618,7 +618,7 @@ function updateTimer() {
         </div>`;
 }
 
-// ========== ПОКАЗЫВАЕМ ПРИВЕТСТВИЕ ПРИ ЗАГРУЗКЕ (ТОЛЬКО 1 РАЗ) ==========
+// ========== ПОКАЗЫВАЕМ ПРИВЕТСТВИЕ И ПРОКРУЧИВАЕМ К НЕМУ ==========
 function showWelcomeMessage() {
     if (!welcomeShown) {
         const contentDiv = document.getElementById('content');
@@ -633,6 +633,14 @@ function showWelcomeMessage() {
         `;
         contentDiv.classList.add('active');
         welcomeShown = true;
+        
+        // ВАЖНО: Прокручиваем к приветствию с задержкой, чтобы страница успела загрузиться
+        setTimeout(() => {
+            contentDiv.scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'start' 
+            });
+        }, 300);
     }
 }
 
@@ -646,7 +654,34 @@ if ('ontouchstart' in window) {
 // Показываем приветствие при загрузке страницы
 window.addEventListener('load', function() {
     createDecorations();
-    showWelcomeMessage(); // Показываем приветствие ровно 1 раз
+    showWelcomeMessage(); // Показываем приветствие и прокручиваем к нему
+});
+
+// Также пробуем показать приветствие сразу после загрузки DOM
+document.addEventListener('DOMContentLoaded', function() {
+    // Создаем приветствие заранее
+    if (!welcomeShown) {
+        const contentDiv = document.getElementById('content');
+        contentDiv.innerHTML = `
+            <div style="text-align: center; padding: 20px;">
+                <div style="font-size: 60px; margin-bottom: 15px; animation: pulse 2s infinite;">💝</div>
+                <h2 style="color: #ff4081;">Привет, любовь моя! 💕</h2>
+                <p style="font-size: 18px; line-height: 1.6; margin-bottom: 25px; padding: 15px; background: rgba(255, 182, 193, 0.1); border-radius: 15px;">
+                Нажимай на кнопки выше и читай что там 💖</p>
+                <button class="back-btn" onclick="hideContent()">Начать просмотр 💕</button>
+            </div>
+        `;
+        contentDiv.classList.add('active');
+        welcomeShown = true;
+        
+        // Прокручиваем к приветствию
+        setTimeout(() => {
+            contentDiv.scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'start' 
+            });
+        }, 200);
+    }
 });
 
 document.addEventListener('click', function(event) {
