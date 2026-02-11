@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
@@ -19,46 +17,15 @@
     <!-- Подключаем стили -->
     <link rel="stylesheet" href="styles.css">
     
+    <!-- ========== ПРЕВЬЮ ДЛЯ TELEGRAM ========== -->
+    <meta property="og:title" content="💝 Подарок для тебя">
+    <meta property="og:image" content="https://github.com/vov202/valentine-app2/raw/main/cat.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:url" content="https://vov202.github.io/valentine-app2/">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <!-- ========================================== -->
+    
     <title>Для тебя 💝</title>
 </head>
-<body>
-    <!-- Декоративные элементы -->
-    <div id="decorations"></div>
-    
-    <div class="container">
-        <div class="header">
-            <h1 class="title">💝 Для самой лучшей 💝</h1>
-            <p class="date">14 февраля 2026</p>
-        </div>
-        
-        <div class="buttons-grid">
-            <button class="btn" onclick="showContent('photo')">🖼️ С этого всё началось</button>
-            <button class="btn" onclick="showContent('meet')">🌌 Начало истории</button>
-            <button class="btn" onclick="showContent('song')">🎵 Твой трек</button>
-            <button class="btn" onclick="showContent('dossier')">📂 Секретное досье</button>
-            <button class="btn" onclick="showContent('time')">⏳ Наше время</button>
-            <button class="btn" onclick="showContent('congrats')">🎉 Поздравлятор 3000</button>
-            <button class="btn" onclick="showContent('fact')">🔍 Интересный факт</button>
-            <button class="btn" onclick="showContent('mirror')">🔮 Зеркало</button>
-            <button class="btn" onclick="showContent('tired')">🛏️ Устал засыпать...</button>
-            <button class="btn secret-btn" onclick="showContent('secret')">🔐 TOP SECRET</button>
-        </div>
-        
-        <!-- Кнопка главного вопроса -->
-        <button class="main-question-btn" onclick="showContent('valentine')">
-            ❓ ГЛАВНЫЙ ВОПРОС
-        </button>
-        
-        <!-- Контент будет показан после загрузки страницы через JavaScript -->
-        <div id="content" class="content"></div>
-        
-        <footer>
-            <p>Создано с любовью специально для тебя 💖</p>
-            <p style="margin-top: 10px; font-size: 12px; opacity: 0.7;">💕🐱💋❤️😻✨💝</p>
-        </footer>
-    </div>
-
-    <!-- Подключаем скрипты -->
-    <script src="script.js"></script>
-</body>
-</html>
