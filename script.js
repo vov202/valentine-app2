@@ -3,7 +3,6 @@ function createDecorations() {
     const container = document.getElementById('decorations');
     const emojis = ['❤️', '💕', '💖', '💝', '🐱', '😻', '💋', '😘', '✨', '🌟'];
     
-    // Сердечки
     for (let i = 0; i < 15; i++) {
         const heart = document.createElement('div');
         heart.className = 'heart-decoration';
@@ -14,7 +13,6 @@ function createDecorations() {
         container.appendChild(heart);
     }
     
-    // Котики
     for (let i = 0; i < 10; i++) {
         const cat = document.createElement('div');
         cat.className = 'cat-decoration';
@@ -25,7 +23,6 @@ function createDecorations() {
         container.appendChild(cat);
     }
     
-    // Поцелуйчики
     for (let i = 0; i < 12; i++) {
         const kiss = document.createElement('div');
         kiss.className = 'kiss-decoration';
@@ -36,7 +33,6 @@ function createDecorations() {
         container.appendChild(kiss);
     }
     
-    // Линии
     for (let i = 0; i < 8; i++) {
         const line = document.createElement('div');
         line.className = 'line-decoration';
@@ -133,7 +129,6 @@ function createFireworks() {
         }, i * 80);
     }
     
-    // Звёздный дождь
     setTimeout(() => {
         for (let i = 0; i < 20; i++) {
             const star = document.createElement('div');
@@ -170,7 +165,6 @@ function createFireworks() {
         }
     }, 1000);
     
-    // Финальный мега-взрыв
     setTimeout(() => {
         const finalBoom = document.createElement('div');
         finalBoom.style.cssText = `
@@ -532,12 +526,12 @@ function answerNo() {
     
     noClickCount++;
     
-    // Увеличиваем кнопку "Да" совсем чуть-чуть
+    // Совсем немного увеличиваем кнопку "Да" (почти незаметно)
     yesClickCount++;
-    yesBtn.style.transform = `scale(${1 + yesClickCount * 0.02})`; // Минимальное увеличение
-    yesBtn.style.fontSize = `${18 + yesClickCount * 0.2}px`; // Почти не меняется
+    yesBtn.style.transform = `scale(${1 + yesClickCount * 0.01})`;
+    yesBtn.style.fontSize = `${18 + yesClickCount * 0.1}px`;
     
-    // Кнопка "Не" сильно убегает
+    // Кнопка "Не" СИЛЬНО убегает
     const container = document.querySelector('.answer-buttons');
     const containerRect = container.getBoundingClientRect();
     
@@ -545,20 +539,20 @@ function answerNo() {
     
     if (noClickCount === 1) {
         noBtn.textContent = 'Точно не? 😢';
-        newLeft = Math.random() * (containerRect.width - 120);
-        newTop = -40 + Math.random() * 50;
+        newLeft = Math.random() * (containerRect.width - 150);
+        newTop = -50 + Math.random() * 60;
     } else if (noClickCount === 2) {
         noBtn.textContent = 'Ну пожалуйста... 🥺';
-        newLeft = Math.random() * (containerRect.width - 140);
-        newTop = -50 + Math.random() * 70;
+        newLeft = Math.random() * (containerRect.width - 180);
+        newTop = -70 + Math.random() * 80;
     } else if (noClickCount === 3) {
         noBtn.textContent = 'Я буду грустить 😭';
-        newLeft = Math.random() * (containerRect.width - 160);
-        newTop = -70 + Math.random() * 90;
+        newLeft = Math.random() * (containerRect.width - 200);
+        newTop = -90 + Math.random() * 100;
     } else {
         noBtn.textContent = 'Ладно, нажми "Да" 😉❤️';
-        newLeft = Math.random() * (containerRect.width - 180);
-        newTop = -100 + Math.random() * 120;
+        newLeft = Math.random() * (containerRect.width - 220);
+        newTop = -120 + Math.random() * 140;
     }
     
     noBtn.style.position = 'absolute';
@@ -568,8 +562,8 @@ function answerNo() {
     noBtn.style.fontSize = '18px';
     
     if (noClickCount >= 6) {
-        noBtn.style.left = `${Math.random() * (containerRect.width - 200)}px`;
-        noBtn.style.top = `${-150 + Math.random() * 200}px`;
+        noBtn.style.left = `${Math.random() * (containerRect.width - 250)}px`;
+        noBtn.style.top = `${-180 + Math.random() * 250}px`;
     }
 }
 
@@ -617,18 +611,7 @@ if ('ontouchstart' in window) {
     });
 }
 
-setTimeout(() => {
-    document.getElementById('content').innerHTML = `
-        <div style="text-align: center; padding: 20px;">
-            <div style="font-size: 60px; margin-bottom: 15px; animation: pulse 2s infinite;">💝</div>
-            <h2 style="color: #ff4081;">Привет, любовь моя! 💕</h2>
-            <p style="font-size: 18px; line-height: 1.6; margin-bottom: 25px; padding: 15px; background: rgba(255, 182, 193, 0.1); border-radius: 15px;">
-            Нажимай на кнопки выше и читай что там 💖</p>
-            <button class="back-btn" onclick="hideContent()">Начать просмотр 💕</button>
-        </div>
-    `;
-    document.getElementById('content').classList.add('active');
-}, 800);
+// УДАЛЯЕМ setTimeout - приветствие уже есть в HTML!
 
 document.addEventListener('click', function(event) {
     const content = document.getElementById('content');
