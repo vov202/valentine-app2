@@ -263,7 +263,7 @@ const contents = {
         <h2>🛏️ Устал засыпать...</h2>
         <div class="music-note">💤😴</div>
         <p style="font-size: 22px; text-align: center; padding: 15px; line-height: 1.6; background: rgba(255, 182, 193, 0.1); border-radius: 15px;">
-        Устал засыпать в обнимку с одеялом, вместо тебя... 💕</p>
+        Устал засыпать в обнимку с одеялом, вместо тебя...😔 </p>
         <button class="back-btn" onclick="hideContent()">Назад</button>
     `,
     
