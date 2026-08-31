@@ -732,4 +732,16 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+/* Перенос кнопки "Официально вместе" в правый нижний угол сетки */
+@media (min-width: 600px) {
+    .buttons-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    /* Принудительно ставим эту кнопку на последнее (12-е) место в сетке */
+    .buttons-grid button[onclick*="official"] {
+        order: 12;
+    }
+}
 
