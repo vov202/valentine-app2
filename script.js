@@ -1,5 +1,5 @@
 // ============================================================================
-// ========== АВГУСТ АПДЕЙТ: ФИКС ДЛЯ КНОПКИ "ОФИЦИАЛЬНО ВМЕСТЕ" ==============
+// ========== АВГУСТ АПДЕЙТ: ЖЕЛЕЗОБЕТОННЫЙ ФИКС ТАЙМЕРА =======================
 // ============================================================================
 (function() {
     const updateTimerLogic = () => {
@@ -40,35 +40,38 @@
         }
     };
 
-    window.addEventListener('load', () => {
-        // Подстраховка: внедряем разметку во все возможные варианты названия ключа
-        const htmlContent = `
-            <h2>❤️ Официально вместе</h2>
-            <div id="official-timer" style="font-size: 18px; text-align: center; padding: 20px;">
-                Загрузка... 💖
-            </div>
-            <button class="back-btn" onclick="hideContent()">Назад</button>
-        `;
-        
+    // Создаем HTML-структуру таймера
+    const htmlContent = `
+        <h2>❤️ Официально вместе</h2>
+        <div id="official-timer" style="font-size: 18px; text-align: center; padding: 20px;">
+            Загрузка... 💖
+        </div>
+        <button class="back-btn" onclick="hideContent()">Назад</button>
+    `;
+
+    // Главный перехватчик кликов
+    const initHook = () => {
+        // Записываем разметку во все возможные ключи объекта contents
         if (typeof contents !== 'undefined') {
-            contents.official = htmlContent;
-            contents.official_together = htmlContent;
-            contents.together = htmlContent;
+            const keys = ['official', 'official_together', 'together', 'meet_official', 'love_official'];
+            keys.forEach(k => { contents[k] = htmlContent; });
         }
 
-        // Перехватываем функцию клика
         const oldShowContent = window.showContent;
         window.showContent = function(type) {
-            if (type === 'official' || type === 'official_together' || type === 'together') {
+            // Если имя типа содержит слова official или together — гарантированно включаем наш таймер
+            if (type && (type.includes('official') || type.includes('together'))) {
                 const contentDiv = document.getElementById('content');
-                contentDiv.innerHTML = htmlContent;
-                contentDiv.classList.add('active');
-                contentDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                
-                updateTimerLogic();
-                if (window.timerInterval) clearInterval(window.timerInterval);
-                window.timerInterval = setInterval(updateTimerLogic, 1000);
-                contentDiv.scrollTop = 0;
+                if (contentDiv) {
+                    contentDiv.innerHTML = htmlContent;
+                    contentDiv.classList.add('active');
+                    contentDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    
+                    updateTimerLogic();
+                    if (window.timerInterval) clearInterval(window.timerInterval);
+                    window.timerInterval = setInterval(updateTimerLogic, 1000);
+                    contentDiv.scrollTop = 0;
+                }
             } else {
                 if (window.timerInterval) {
                     clearInterval(window.timerInterval);
@@ -77,11 +80,17 @@
                 if (typeof oldShowContent === 'function') oldShowContent(type);
             }
         };
-    });
+    };
+
+    // Запускаем перехват сразу и на всякий случай дублируем по загрузке
+    initHook();
+    window.addEventListener('load', initHook);
+    document.addEventListener('DOMContentLoaded', initHook);
 })();
 // ============================================================================
 // ========== КОНЕЦ АВГУСТ АПДЕЙТА (ДАЛЕЕ ТВОЙ СТАРЫЙ КОД) ====================
 // ============================================================================
+
 
 
 // ========== ДЕКОРАТИВНЫЕ ЭЛЕМЕНТЫ ==========
