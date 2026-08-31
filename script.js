@@ -1,5 +1,5 @@
 // ============================================================================
-// ========== АВГУСТ АПДЕЙТ: ЖЕЛЕЗОБЕТОННЫЙ ФИКС ТАЙМЕРА =======================
+// ========== АВГУСТ АПДЕЙТ: УЛЬТИМАТИВНЫЙ ФИКС ОТОБРАЖЕНИЯ ===================
 // ============================================================================
 (function() {
     const updateTimerLogic = () => {
@@ -20,11 +20,11 @@
         const timerElement = document.getElementById('official-timer');
         if (timerElement) {
             timerElement.innerHTML = `
-                <div class="timer-container">
-                    <div class="timer-main">
+                <div class="timer-container" style="text-align: center; line-height: 1.6;">
+                    <div class="timer-main" style="font-size: 20px; font-weight: bold; margin-bottom: 15px; color: #ff4081;">
                         💖 ${days} дней ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')} 💖
                     </div>
-                    <div class="timer-details">
+                    <div class="timer-details" style="font-size: 16px;">
                         Это:<br>
                         <strong>${months} месяцев</strong><br>
                         <strong>${finalDays} дней</strong><br>
@@ -40,7 +40,6 @@
         }
     };
 
-    // Создаем HTML-структуру таймера
     const htmlContent = `
         <h2>❤️ Официально вместе</h2>
         <div id="official-timer" style="font-size: 18px; text-align: center; padding: 20px;">
@@ -49,9 +48,7 @@
         <button class="back-btn" onclick="hideContent()">Назад</button>
     `;
 
-    // Главный перехватчик кликов
     const initHook = () => {
-        // Записываем разметку во все возможные ключи объекта contents
         if (typeof contents !== 'undefined') {
             const keys = ['official', 'official_together', 'together', 'meet_official', 'love_official'];
             keys.forEach(k => { contents[k] = htmlContent; });
@@ -59,12 +56,16 @@
 
         const oldShowContent = window.showContent;
         window.showContent = function(type) {
-            // Если имя типа содержит слова official или together — гарантированно включаем наш таймер
             if (type && (type.includes('official') || type.includes('together'))) {
                 const contentDiv = document.getElementById('content');
                 if (contentDiv) {
                     contentDiv.innerHTML = htmlContent;
+                    
+                    // Железобетонно заставляем блок показаться через прямые инлайн-стили
+                    contentDiv.style.display = 'block';
+                    contentDiv.style.opacity = '1';
                     contentDiv.classList.add('active');
+                    
                     contentDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
                     
                     updateTimerLogic();
@@ -82,7 +83,6 @@
         };
     };
 
-    // Запускаем перехват сразу и на всякий случай дублируем по загрузке
     initHook();
     window.addEventListener('load', initHook);
     document.addEventListener('DOMContentLoaded', initHook);
