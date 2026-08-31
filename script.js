@@ -1,97 +1,3 @@
-// ============================================================================
-// ========== АВГУСТ АПДЕЙТ: УЛЬТИМАТИВНЫЙ ФИКС ОТОБРАЖЕНИЯ ===================
-// ============================================================================
-(function() {
-    const updateTimerLogic = () => {
-        const startDate = new Date('2026-08-01T00:00:00');
-        const now = new Date();
-        const diff = now - startDate;
-        
-        const totalSeconds = Math.floor(diff / 1000);
-        const days = Math.floor(totalSeconds / (3600 * 24));
-        const hours = Math.floor((totalSeconds % (3600 * 24)) / 3600);
-        const minutes = Math.floor((totalSeconds % 3600) / 60);
-        const seconds = totalSeconds % 60;
-        
-        const remainingDays = days % 365;
-        const months = Math.floor(remainingDays / 30.44);
-        const finalDays = Math.floor(remainingDays % 30.44);
-        
-        const timerElement = document.getElementById('official-timer');
-        if (timerElement) {
-            timerElement.innerHTML = `
-                <div class="timer-container" style="text-align: center; line-height: 1.6;">
-                    <div class="timer-main" style="font-size: 20px; font-weight: bold; margin-bottom: 15px; color: #ff4081;">
-                        💖 ${days} дней ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')} 💖
-                    </div>
-                    <div class="timer-details" style="font-size: 16px;">
-                        Это:<br>
-                        <strong>${months} месяцев</strong><br>
-                        <strong>${finalDays} дней</strong><br>
-                        <strong>${hours} часов</strong><br>
-                        <strong>${minutes} минут</strong><br>
-                        <strong>${seconds} секунд</strong><br><br>
-                        <div style="color: #ff6699; font-style: italic;">
-                        Новый отсчёт нашей бесконечности! ✨<br>
-                        <small style="font-size: 14px;">(обновляется каждую секунду) ⏰</small>
-                        </div>
-                    </div>
-                </div>`;
-        }
-    };
-
-    const htmlContent = `
-        <h2>❤️ Официально вместе</h2>
-        <div id="official-timer" style="font-size: 18px; text-align: center; padding: 20px;">
-            Загрузка... 💖
-        </div>
-        <button class="back-btn" onclick="hideContent()">Назад</button>
-    `;
-
-    const initHook = () => {
-        if (typeof contents !== 'undefined') {
-            const keys = ['official', 'official_together', 'together', 'meet_official', 'love_official'];
-            keys.forEach(k => { contents[k] = htmlContent; });
-        }
-
-        const oldShowContent = window.showContent;
-        window.showContent = function(type) {
-            if (type && (type.includes('official') || type.includes('together'))) {
-                const contentDiv = document.getElementById('content');
-                if (contentDiv) {
-                    contentDiv.innerHTML = htmlContent;
-                    
-                    // Железобетонно заставляем блок показаться через прямые инлайн-стили
-                    contentDiv.style.display = 'block';
-                    contentDiv.style.opacity = '1';
-                    contentDiv.classList.add('active');
-                    
-                    contentDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    
-                    updateTimerLogic();
-                    if (window.timerInterval) clearInterval(window.timerInterval);
-                    window.timerInterval = setInterval(updateTimerLogic, 1000);
-                    contentDiv.scrollTop = 0;
-                }
-            } else {
-                if (window.timerInterval) {
-                    clearInterval(window.timerInterval);
-                    window.timerInterval = null;
-                }
-                if (typeof oldShowContent === 'function') oldShowContent(type);
-            }
-        };
-    };
-
-    initHook();
-    window.addEventListener('load', initHook);
-    document.addEventListener('DOMContentLoaded', initHook);
-})();
-// ============================================================================
-// ========== КОНЕЦ АВГУСТ АПДЕЙТА (ДАЛЕЕ ТВОЙ СТАРЫЙ КОД) ====================
-// ============================================================================
-
-
 
 // ========== ДЕКОРАТИВНЫЕ ЭЛЕМЕНТЫ ==========
 function createDecorations() {
@@ -792,3 +698,38 @@ document.addEventListener('click', function(event) {
         hideContent();
     }
 });
+// Фикс кнопки "Официально вместе"
+document.addEventListener('DOMContentLoaded', () => {
+    if (typeof contents !== 'undefined') {
+        contents.official = `<h2>❤️ Официально вместе</h2><div id="official-timer" style="font-size: 18px; text-align: center; padding: 20px;">Загрузка... 💖</div><button class="back-btn" onclick="hideContent()">Назад</button>`;
+    }
+    const btns = document.querySelectorAll('button, .btn');
+    btns.forEach(b => {
+        if (b.textContent && b.textContent.includes('Официально вместе')) {
+            b.removeAttribute('onclick');
+            b.onclick = (e) => {
+                e.preventDefault();
+                const div = document.getElementById('content');
+                if (!div) return;
+                div.innerHTML = contents.official;
+                div.style.display = 'block';
+                div.classList.add('active');
+                div.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                const up = () => {
+                    const diff = new Date() - new Date('2026-08-01T00:00:00');
+                    const sec = Math.floor(diff / 1000);
+                    const d = Math.floor(sec / 86400);
+                    const h = Math.floor((sec % 86400) / 3600);
+                    const m = Math.floor((sec % 3600) / 60);
+                    const s = sec % 60;
+                    const el = document.getElementById('official-timer');
+                    if (el) el.innerHTML = `<div class="timer-main" style="font-size: 20px; font-weight: bold; color: #ff4081;">💖 ${d} дней ${h.toString().padStart(2,'0')}:${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')} 💖</div><div style="color: #ff6699; font-style: italic; margin-top: 15px;">Новый отсчёт нашей бесконечности! ✨</div>`;
+                };
+                up();
+                if (window.timerInterval) clearInterval(window.timerInterval);
+                window.timerInterval = setInterval(up, 1000);
+            };
+        }
+    });
+});
+
