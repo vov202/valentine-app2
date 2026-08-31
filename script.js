@@ -698,7 +698,7 @@ document.addEventListener('click', function(event) {
         hideContent();
     }
 });
-// Фикс кнопки "Официально вместе"
+// Фикс кнопки "Официально вместе" + позиционирование в правый нижний угол
 document.addEventListener('DOMContentLoaded', () => {
     if (typeof contents !== 'undefined') {
         contents.official = `<h2>❤️ Официально вместе</h2><div id="official-timer" style="font-size: 18px; text-align: center; padding: 20px;">Загрузка... 💖</div><button class="back-btn" onclick="hideContent()">Назад</button>`;
@@ -706,9 +706,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const btns = document.querySelectorAll('button, .btn');
     btns.forEach(b => {
         if (b.textContent && b.textContent.includes('Официально вместе')) {
+            // 1. Принудительно двигаем кнопку в правый нижний угол через инлайн-стиль
+            b.style.order = "999";
+            
+            // 2. Железобетонно чиним кликабельность кнопки
             b.removeAttribute('onclick');
             b.onclick = (e) => {
                 e.preventDefault();
+                e.stopPropagation();
                 const div = document.getElementById('content');
                 if (!div) return;
                 div.innerHTML = contents.official;
@@ -732,16 +737,4 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
-/* Перенос кнопки "Официально вместе" в правый нижний угол сетки */
-@media (min-width: 600px) {
-    .buttons-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-    }
-    
-    /* Принудительно ставим эту кнопку на последнее (12-е) место в сетке */
-    .buttons-grid button[onclick*="official"] {
-        order: 12;
-    }
-}
 
