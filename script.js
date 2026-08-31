@@ -1,3 +1,99 @@
+// ============================================================================
+// ========== АВГУСТ АПДЕЙТ: КОД ДЛЯ КНОПКИ "ОФИЦИАЛЬНО ВМЕСТЕ" ==============
+// ============================================================================
+
+// 1. Автоматическое добавление новой разметки в объект contents при загрузке
+document.addEventListener('DOMContentLoaded', () => {
+    if (typeof contents !== 'undefined') {
+        contents.official = `
+            <h2>❤️ Официально вместе</h2>
+            <div id="official-timer" style="font-size: 18px; text-align: center; padding: 20px;">
+                Загрузка... 💖
+            </div>
+            <button class="back-btn" onclick="hideContent()">Назад</button>
+        `;
+    }
+});
+
+// 2. Перехват клика по кнопке official для запуска нового таймера
+const originalShowContent = window.showContent;
+window.showContent = function(type) {
+    if (type === 'official') {
+        const contentDiv = document.getElementById('content');
+        if (typeof contents !== 'undefined' && contents.official) {
+            contentDiv.innerHTML = contents.official;
+        } else {
+            contentDiv.innerHTML = '<p>Контент скоро появится... 💕</p>';
+        }
+        contentDiv.classList.add('active');
+        
+        contentDiv.scrollIntoView({ 
+            behavior: 'smooth',
+            block: 'start'
+        });
+        
+        updateOfficialTimer();
+        if (window.timerInterval) clearInterval(window.timerInterval);
+        window.timerInterval = setInterval(updateOfficialTimer, 1000);
+        
+        contentDiv.scrollTop = 0;
+        return;
+    }
+    
+    // Если нажата любая другая кнопка — работает твой старый оригинальный код
+    if (type !== 'time' && window.timerInterval) {
+        clearInterval(window.timerInterval);
+        window.timerInterval = null;
+    }
+    if (typeof originalShowContent === 'function') {
+        originalShowContent(type);
+    }
+};
+
+// 3. Функция самого таймера от 1 августа 2026 года
+function updateOfficialTimer() {
+    const startDate = new Date('2026-08-01T00:00:00');
+    const now = new Date();
+    const diff = now - startDate;
+    
+    const totalSeconds = Math.floor(diff / 1000);
+    const days = Math.floor(totalSeconds / (3600 * 24));
+    const hours = Math.floor((totalSeconds % (3600 * 24)) / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+    
+    const remainingDays = days % 365;
+    const months = Math.floor(remainingDays / 30.44);
+    const finalDays = Math.floor(remainingDays % 30.44);
+    
+    const timerElement = document.getElementById('official-timer');
+    if (!timerElement) return;
+    
+    timerElement.innerHTML = `
+        <div class="timer-container">
+            <div class="timer-main">
+                💖 ${days} дней ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')} 💖
+            </div>
+            <div class="timer-details">
+                Это:<br>
+                <strong>${months} месяцев</strong><br>
+                <strong>${finalDays} дней</strong><br>
+                <strong>${hours} часов</strong><br>
+                <strong>${minutes} минут</strong><br>
+                <strong>${seconds} секунд</strong><br><br>
+                <div style="color: #ff6699; font-style: italic;">
+                Новый отсчёт нашей бесконечности! ✨<br>
+                <small style="font-size: 14px;">(обновляется каждую секунду) ⏰</small>
+                </div>
+            </div>
+        </div>`;
+}
+
+// ============================================================================
+// ========== КОНЕЦ АВГУСТ АПДЕЙТА (ДАЛЕЕ ИДЕТ ТВОЙ СТАРЫЙ КОД) ===============
+// ============================================================================
+
+
 // ========== ДЕКОРАТИВНЫЕ ЭЛЕМЕНТЫ ==========
 function createDecorations() {
     const container = document.getElementById('decorations');
